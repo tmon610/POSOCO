@@ -147,7 +147,7 @@ function startScript()
 
         };
     }
-    document.getElementById("divsuggestion").value = suggestions;
+    document.getElementById("divsuggestion").innerHTML = suggestions;
 }
 
 function start(){
