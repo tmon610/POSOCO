@@ -37,10 +37,14 @@ function getLocalScadaValue(idStr, isNumeric) {
     var idStr1 = "" + idStr;
     var val = results_g[idStr1];
     if (typeof val != 'undefined' || val != null) {
-        if (isNumeric && !isNaN(val)) {
-            return val;
+        if (isNumeric) {
+            if(!isNaN(val)){
+                return val;
+            } else{
+                return null;
+            }
         }
-        return null;
+        return val;
     }
     else {
         return null;
