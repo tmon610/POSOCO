@@ -60,7 +60,7 @@ function startScript() {
     }
 
 
-    var suggestions = "<h2>Suggestions</h2>" + "  \n";
+    var suggestions = "<h2  style='color:white'>Suggestions</h2>" + "  \n";
 
 
     function BRStatus(brId) {
