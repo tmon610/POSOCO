@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid Assistant</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+</head>
+<body bgcolor="black">
+
+<div class="header">
+    <center><h1>Grid Assistant</h1></center>
+</div>
+
+<div class="row">
+
+    <div id="divPanel" class="col-1">
+        <center>
+            <button onclick="startMonitoring()">Start</button>
+            <br><br><br><br>
+            <button onclick="stopMonitoring()">Stop</button>
+            <br><br><br><br>
+            <button onclick="clearSuggestions()">Clear Suggestions</button>
+        </center>
+    </div>
+
+    <div id="div_suggestion" class="col-2"></div>
+
+</div>
+<script src="libs/js/jquery.min.js"></script>
+<script src="libs/js/async.min.js"></script>
+<script src="utils.js"></script>
+<script src="global_config.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
