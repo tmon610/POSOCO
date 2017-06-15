@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			#divPanel,#divsuggestion {
+				border-style: outset;
+				height: 480px;
+				padding: 90px 50px 50px 80px;
+			}
+			* {
+				box-sizing: border-box;
+				color: white;
+			}
+			.header {
+				border: 2px solid white;
+
+			}
+
+			[class*="col-"] {
+				float: left;
+				padding: 10px;
+				border: 2px solid white;
+			}
+			
+			.col-1 {width: 25%;}
+			.col-2 {width: 75%;}
+			
+			button
+			{	width: 100%;
+				background-color: #DCDCDC;
+				border: none;
+				color: black;
+				padding: 15px 32px;
+				text-align: center;
+				display: inline-block;
+				font-size: 20px;
+				margin: 4px 2px;
+				cursor: pointer;
+			}
+			button:hover 
+			{
+				background-color: #696969;
+				color: white;
+			}
+
+		</style>
+	</head>
+	<body bgcolor="black">
+		<script src="main.js"></script>
+		<div class="header">
+			<center><h1>Grid Assistant</h1></center>
+		</div>
+
+		<div class="row">
+
+			<div id="divPanel" class="col-1">
+				<center>
+					<button onclick="start()">Start</button></br></br></br></br>
+					<button onclick="stop()">Stop</button>
+				</center> 
+			</div>
+
+			<div id="divsuggestion" class="col-2"></div>
+
+		</div>
+	</body>
+</html>
