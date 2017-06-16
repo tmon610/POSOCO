@@ -31,7 +31,7 @@ var fetchScadaValue = function (scadaSourceObj, callback) {
         type: 'GET',
         success: function (result) {
             //toastr["info"]("Data received from server");
-            console.log(result);
+            //console.log(result);
             result.pntId = scadaSourceObj.pntId;
             callback(null, result);
         },
@@ -89,16 +89,18 @@ function monitorBusReactors() {
                 }
 
                 // Create Suggestion
+                numBrsOut = substationBRsStatusObj.off.length;
                 numBrsIn = substationBRsStatusObj.on.length;
-                if (numBrsIn) {
+                if (numBrsOut == substationSourceObj.brIds.length) {
                     categoryStr = "info";
                     categoryPriority = 0;
-                    messageStr = substationSourceObj.name + " voltage is low but all Bus Reactors are OUT";
+                    messageStr = substationSourceObj.name + " voltage(" + substationAPIResultObj.dval + ") is low but all(" + substationSourceObj.brIds.length + ") Bus Reactors are OUT";
                 } else {
                     categoryStr = "action";
                     categoryPriority = 1;
                     messageStr = "Take " + numBrsIn + " Bus Reactors of " + substationSourceObj.name + " out since the voltage is " + substationAPIResultObj.dval;
                 }
+                messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut;
 
                 // Push to global array
                 addSuggestion({
@@ -128,15 +130,17 @@ function monitorBusReactors() {
 
                 // Create Suggestion
                 numBrsOut = substationBRsStatusObj.off.length;
-                if (numBrsOut) {
+                numBrsIn = substationBRsStatusObj.on.length;
+                if (numBrsIn == substationSourceObj.brIds.length) {
                     categoryPriority = 0;
                     categoryStr = "info";
-                    messageStr = substationSourceObj.name + " voltage is high but all Bus Reactors are IN";
+                    messageStr = substationSourceObj.name + " voltage(" + substationAPIResultObj.dval + ") is high but all(" + substationSourceObj.brIds.length + ") Bus Reactors are IN";
                 } else {
                     categoryPriority = 1;
                     categoryStr = "action";
                     messageStr = "Take " + numBrsOut + " Bus Reactors of " + substationSourceObj.name + " into service since the voltage is " + substationAPIResultObj.dval;
                 }
+                messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut;
 
                 // Push to global array
                 addSuggestion({
