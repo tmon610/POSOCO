@@ -1,19 +1,9 @@
 // global variables start
 var substation_objects_g = [
     {
-        name: "Substation_1",
-        pntId: "123",
-        brIds: [{pntId: "101", name: "Substation_1_BR_1"}, {pntId: "102", name: "Substation_1_BR_2"}],
-        base_voltage: 400,
-        high_alert_limit: 420,
-        high_warning_limit: 410,
-        low_warning_limit: 390,
-        low_alert_limit: 380
-    },
-    {
-        name: "Substation_2",
-        pntId: "456",
-        brIds: [{pntId: "103", name: "Substation_2_BR_1"}, {pntId: "104", name: "Substation_2_BR_2"}],
+        name: "PUNE GIS SHIKHRAPUR 765kV SUBSTATION",
+        pntId: "WRLDCMP.SCADA1.A0043525",
+        brIds: [{pntId: "WRLDCMP.SCADA1.A0043555", name: "Substation_1_BR_1"}, {pntId: "WRLDCMP.SCADA1.A0043556", name: "Substation_1_BR_2"}],
         base_voltage: 765,
         high_alert_limit: 795,
         high_warning_limit: 785,
@@ -21,14 +11,14 @@ var substation_objects_g = [
         low_alert_limit: 745
     },
     {
-        name: "Substation_3",
-        pntId: "789",
-        brIds: [{pntId: "105", name: "Substation_3_BR_1"}, {pntId: "106", name: "Substation_3_BR_2"}],
-        base_voltage: 200,
-        high_alert_limit: 210,
-        high_warning_limit: 205,
-        low_warning_limit: 195,
-        low_alert_limit: 190
+        name: "SHOLAPUR-PG 765kV SUBSTATION",
+        pntId: "WRLDCMP.SCADA1.A0004316",
+        brIds: [{pntId: "WRLDCMP.SCADA1.A0043558", name: "Substation_2_BR_1"}, {pntId: "WRLDCMP.SCADA1.A0043560", name: "Substation_2_BR_2"}],
+        base_voltage: 765,
+        high_alert_limit: 795,
+        high_warning_limit: 785,
+        low_warning_limit: 755,
+        low_alert_limit: 745
     }
 ];
 
@@ -101,4 +91,3 @@ function defineSubstationVoltageLimitsIfAbsent(substationSourceObj) {
         }
     }
 }
-
