@@ -1,6 +1,11 @@
 function getLocalScadaValueObjById(idStr, isNumeric) {
-    var valObj = scadaAPIResults_g["" + idStr];
-    if (!valObj && !valObj.dval) {
+    var valObj = null;
+    for (var i = 0; i < scadaAPIResults_g.length; i++) {
+        if (scadaAPIResults_g[i]["pntId"] == idStr) {
+            valObj = scadaAPIResults_g[i];
+        }
+    }
+    if (typeof valObj == 'undefined' && !valObj && !valObj.dval) {
         return null;
     }
     var val = valObj.dval;
@@ -84,7 +89,7 @@ function monitorBusReactors() {
                 }
 
                 // Create Suggestion
-                numBrsIn = substationAPIResultObj.on.length;
+                numBrsIn = substationBRsStatusObj.on.length;
                 if (numBrsIn) {
                     categoryStr = "info";
                     categoryPriority = 0;
@@ -122,7 +127,7 @@ function monitorBusReactors() {
                 }
 
                 // Create Suggestion
-                numBrsOut = substationAPIResultObj.off.length;
+                numBrsOut = substationBRsStatusObj.off.length;
                 if (numBrsOut) {
                     categoryPriority = 0;
                     categoryStr = "info";

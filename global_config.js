@@ -3,7 +3,10 @@ var substation_objects_g = [
     {
         name: "PUNE GIS SHIKHRAPUR 765kV SUBSTATION",
         pntId: "WRLDCMP.SCADA1.A0043525",
-        brIds: [{pntId: "WRLDCMP.SCADA1.A0043555", name: "Substation_1_BR_1"}, {pntId: "WRLDCMP.SCADA1.A0043556", name: "Substation_1_BR_2"}],
+        brIds: [{pntId: "WRLDCMP.SCADA1.A0043555", name: "Substation_1_BR_1"}, {
+            pntId: "WRLDCMP.SCADA1.A0043556",
+            name: "Substation_1_BR_2"
+        }],
         base_voltage: 765,
         high_alert_limit: 795,
         high_warning_limit: 785,
@@ -13,7 +16,10 @@ var substation_objects_g = [
     {
         name: "SHOLAPUR-PG 765kV SUBSTATION",
         pntId: "WRLDCMP.SCADA1.A0004316",
-        brIds: [{pntId: "WRLDCMP.SCADA1.A0043558", name: "Substation_2_BR_1"}, {pntId: "WRLDCMP.SCADA1.A0043560", name: "Substation_2_BR_2"}],
+        brIds: [{pntId: "WRLDCMP.SCADA1.A0043558", name: "Substation_2_BR_1"}, {
+            pntId: "WRLDCMP.SCADA1.A0043560",
+            name: "Substation_2_BR_2"
+        }],
         base_voltage: 765,
         high_alert_limit: 795,
         high_warning_limit: 785,
