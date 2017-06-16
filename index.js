@@ -33,6 +33,11 @@ var fetchScadaValue = function (scadaSourceObj, callback) {
             //toastr["info"]("Data received from server");
             //console.log(result);
             result.pntId = scadaSourceObj.pntId;
+            var val = result.dval;
+            // Convert Numeric value to string if present
+            if (typeof val != 'undefined' && val != null && !isNaN(val)) {
+                result.dval = Number(val);
+            }
             callback(null, result);
         },
         error: function (textStatus, errorThrown) {
@@ -98,9 +103,9 @@ function monitorBusReactors() {
                 } else {
                     categoryStr = "action";
                     categoryPriority = 1;
-                    messageStr = "Take " + numBrsIn + " Bus Reactors of " + substationSourceObj.name + " out since the voltage is " + substationAPIResultObj.dval;
+                    messageStr = "Out " + numBrsIn + " Bus Reactors of <span style='color: #5D5D5D'>" + substationSourceObj.name + "</span> since voltage is " + substationAPIResultObj.dval;
                 }
-                messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut;
+                messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut + "]";
 
                 // Push to global array
                 addSuggestion({
@@ -111,6 +116,7 @@ function monitorBusReactors() {
                     dataSourceObj: substationSourceObj,
                     severity: severityStr,
                     severityPriority: severityPriority,
+                    severityIndex: Math.abs((substationAPIResultObj.dval - substationSourceObj.base_voltage) / substationSourceObj.base_voltage),
                     color: colorStr
                 });
             }
@@ -138,28 +144,30 @@ function monitorBusReactors() {
                 } else {
                     categoryPriority = 1;
                     categoryStr = "action";
-                    messageStr = "Take " + numBrsOut + " Bus Reactors of " + substationSourceObj.name + " into service since the voltage is " + substationAPIResultObj.dval;
+                    messageStr = "Take " + numBrsOut + " Bus Reactors of <span style='color: #5D5D5D'>" + substationSourceObj.name + "</span> into service since voltage is " + substationAPIResultObj.dval;
                 }
-                messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut;
+                messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut + "]";
 
                 // Push to global array
                 addSuggestion({
-                    categoryPriority: categoryPriority,
-                    categoryStr: categoryStr,
-                    message: messageStr,
-                    brIds: substationBRsStatusObj["on"],
-                    dataSourceObj: substationSourceObj,
-                    severity: severityStr,
-                    severityPriority: severityPriority,
-                    color: colorStr
-                });
+                        categoryPriority: categoryPriority,
+                        categoryStr: categoryStr,
+                        message: messageStr,
+                        brIds: substationBRsStatusObj["on"],
+                        dataSourceObj: substationSourceObj,
+                        severity: severityStr,
+                        severityPriority: severityPriority,
+                        severityIndex: Math.abs((substationAPIResultObj.dval - substationSourceObj.base_voltage) / substationSourceObj.base_voltage),
+                        color: colorStr
+                    }
+                );
             }
         }
     }
 
     /* Generate suggestion for substation bus reactors end */
 
-    // Return the status of a Bus Reactors Array as an object with `on` and `off` lists
+// Return the status of a Bus Reactors Array as an object with `on` and `off` lists
     function createBRStatusObj(brIdObjectsArray) {
         var i = 0;
         var busReactorsStatusObj = {"on": [], "off": []};
@@ -183,14 +191,22 @@ function monitorBusReactors() {
 function displaySuggestions() {
     var suggestions = [];
     // sort suggestions array by category first and severity next - most important will be at the last
-    suggestionsArray_g.sort(dynamicSortMultiple("categoryPriority", "severityPriority"));
+    suggestionsArray_g.sort(dynamicSortMultiple("categoryPriority", "severityPriority", "severityIndex"));
     suggestions.push("<h3  style='color:white'>Suggestions</h3>" + "  \n");
     for (var i = suggestionsArray_g.length - 1; i >= 0; i--) {
+        // If there is change in category priority and severity Priority add <br>
+        if (i != 0 && suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
+            suggestions.push("<br><br>");
+        }
+        if (i != 0 && suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i - 1]["severityPriority"]) {
+            suggestions.push("<br>");
+        }
+
         var colorStr = suggestionsArray_g[i]["color"];
         if (!colorStr) {
             colorStr = "white";
         }
-        var tempString = suggestionsArray_g[i]["message"] + " [pointId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]";
+        var tempString = suggestionsArray_g[i]["message"] + " <span style='color: #f0f8ff'>[pntId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]</span>";
         suggestions.push("<p style='color:" + colorStr + "'>" + tempString + "</p>");
     }
     document.getElementById("div_suggestion").innerHTML = suggestions.join("\n");
