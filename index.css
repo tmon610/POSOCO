@@ -57,3 +57,16 @@ button:hover {
     margin-top: 3px;
     margin-bottom: 3px;
 }
+
+#div_suggestion {
+    overflow: auto;
+}
+
+.name_span {
+    color: #f0f8ff;
+}
+
+.debug_span {
+    color: #f0f8ff;
+    font-size: 0.5em;
+}

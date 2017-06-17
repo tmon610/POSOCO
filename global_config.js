@@ -2,13 +2,13 @@
 var substation_objects_g = [
     {
         name: 'Aurangabad',
-        pntId: 'WRLDCMP.SCADA1.A0036002',
+        pntId: 'WRLDCMP.SCADA1.A0037327',
         base_voltage: 765,
         brIds: [{name: 'Aurangabad_BR1', pntId: 'WRLDCMP.SCADA1.A0037389'}]
     },
     {
         name: 'Akola',
-        pntId: 'WRLDCMP.SCADA1.A0037325',
+        pntId: 'WRLDCMP.SCADA1.A0036004',
         base_voltage: 765,
         brIds: [{name: 'Akola_BR1', pntId: 'WRLDCMP.SCADA1.A0000577'}]
     },
@@ -20,19 +20,19 @@ var substation_objects_g = [
     },
     {
         name: 'Bhopal_BDTCL',
-        pntId: 'WRLDCMP.SCADA1.A0000500',
+        pntId: 'WRLDCMP.SCADA1.A0037486',
         base_voltage: 765,
         brIds: [{name: 'Bhopal_BDTCL_BR1', pntId: 'WRLDCMP.SCADA1.A0037515'}]
     },
     {
         name: 'Champa',
-        pntId: 'WRLDCMP.SCADA1.A0041476',
+        pntId: 'WRLDCMP.SCADA1.A0045143',
         base_voltage: 765,
         brIds: [{name: 'Champa_BR1', pntId: 'WRLDCMP.SCADA1.A0041484'}]
     },
     {
         name: 'Dharamjaygarh',
-        pntId: 'WRLDCMP.SCADA1.A0038191',
+        pntId: 'WRLDCMP.SCADA1.A0038193',
         base_voltage: 765,
         brIds: [{name: 'Dharamjaygarh_BR1', pntId: 'WRLDCMP.SCADA1.A0038248'}, {
             name: 'Dharamjaygarh_BR2',
@@ -41,19 +41,19 @@ var substation_objects_g = [
     },
     {
         name: 'Dhule_BDTCL',
-        pntId: 'WRLDCMP.SCADA1.A0038508',
+        pntId: 'WRLDCMP.SCADA1.A0038510',
         base_voltage: 765,
         brIds: [{name: 'Dhule_BDTCL_BR1', pntId: 'WRLDCMP.SCADA1.A0038538'}]
     },
     {
         name: 'Gwalior',
-        pntId: 'WRLDCMP.SCADA1.A0001653',
+        pntId: 'WRLDCMP.SCADA1.A0001481',
         base_voltage: 765,
         brIds: [{name: 'Gwalior_BR1', pntId: 'WRLDCMP.SCADA1.A0001526'}]
     },
     {
         name: 'Indore_PG',
-        pntId: 'WRLDCMP.SCADA1.A0037672',
+        pntId: 'WRLDCMP.SCADA1.A0001655',
         base_voltage: 765,
         brIds: [{name: 'Indore_PG_BR1', pntId: 'WRLDCMP.SCADA1.A0001682'}, {
             name: 'Indore_PG_BR2',
@@ -62,25 +62,25 @@ var substation_objects_g = [
     },
     {
         name: 'Koradi(3)',
-        pntId: 'WRLDCMP.SCADA1.A0037886',
+        pntId: 'WRLDCMP.SCADA1.A0045802',
         base_voltage: 765,
         brIds: [{name: 'Koradi(3)_BR1', pntId: 'WRLDCMP.SCADA1.A0045828'}]
     },
     {
         name: 'Kotra',
-        pntId: 'WRLDCMP.SCADA1.A0043525',
+        pntId: 'WRLDCMP.SCADA1.A0037886',
         base_voltage: 765,
         brIds: [{name: 'Kotra_BR1', pntId: 'WRLDCMP.SCADA1.A0037936'}]
     },
     {
         name: 'Pune_GIS',
-        pntId: 'WRLDCMP.SCADA1.A0003668',
+        pntId: 'WRLDCMP.SCADA1.A0043527',
         base_voltage: 765,
         brIds: [{name: 'Pune_GIS_BR1', pntId: 'WRLDCMP.SCADA1.A0043546'}]
     },
     {
         name: 'Sasan',
-        pntId: 'WRLDCMP.SCADA1.A0004007',
+        pntId: 'WRLDCMP.SCADA1.A0003668',
         base_voltage: 765,
         brIds: [{name: 'Sasan_BR1', pntId: 'WRLDCMP.SCADA1.A0003705'}, {
             name: 'Sasan_BR2',
@@ -95,25 +95,25 @@ var substation_objects_g = [
     },
     {
         name: 'Seoni',
-        pntId: 'WRLDCMP.SCADA1.A0004140',
+        pntId: 'WRLDCMP.SCADA1.A0004009',
         base_voltage: 765,
         brIds: [{name: 'Seoni_BR1', pntId: 'WRLDCMP.SCADA1.A0004055'}]
     },
     {
         name: 'Sipat',
-        pntId: 'WRLDCMP.SCADA1.A0004316',
+        pntId: 'WRLDCMP.SCADA1.A0004142',
         base_voltage: 765,
         brIds: [{name: 'Sipat_BR1', pntId: 'WRLDCMP.SCADA1.A0004207'}]
     },
     {
         name: 'Solapur',
-        pntId: 'WRLDCMP.SCADA1.A0038084',
+        pntId: 'WRLDCMP.SCADA1.A0004318',
         base_voltage: 765,
-        brIds: [{name: 'Solapur_BR1', pntId: 'WRLDCMP.SCADA1.A0004368'}]
+        brIds: [{name: 'Solapur_BR1', pntId: 'WRLDCMP.SCADA3.A0106150'}]
     },
     {
         name: 'Tamnar',
-        pntId: 'WRLDCMP.SCADA1.A0043469',
+        pntId: 'WRLDCMP.SCADA1.A0038086',
         base_voltage: 765,
         brIds: [{name: 'Tamnar_BR1', pntId: 'WRLDCMP.SCADA1.A0038107'}]
     },
@@ -125,19 +125,19 @@ var substation_objects_g = [
     },
     {
         name: 'Vadodara',
-        pntId: 'WRLDCMP.SCADA1.A0043413',
+        pntId: 'WRLDCMP.SCADA1.A0043471',
         base_voltage: 765,
         brIds: [{name: 'Vadodara_BR1', pntId: 'WRLDCMP.SCADA1.A0043493'}]
     },
     {
         name: 'Vindhyanchal_PS',
-        pntId: 'WRLDCMP.SCADA1.A0005338',
+        pntId: 'WRLDCMP.SCADA1.A0043415',
         base_voltage: 765,
         brIds: [{name: 'Vindhyanchal_PS_BR1', pntId: 'WRLDCMP.SCADA1.A0045506'}]
     },
     {
         name: 'Wardha',
-        pntId: 'WRLDCMP.SCADA1.A0037546',
+        pntId: 'WRLDCMP.SCADA1.A0005340',
         base_voltage: 765,
         brIds: [{name: 'Wardha_BR1', pntId: 'WRLDCMP.SCADA1.A0005439'}, {
             name: 'Wardha_BR2',
@@ -149,6 +149,12 @@ var substation_objects_g = [
         pntId: 'WRLDCMP.SCADA1.A0037548',
         base_voltage: 765,
         brIds: [{name: 'Durg_BR1', pntId: 'WRLDCMP.SCADA1.A0037581'}]
+    },
+	{
+        name: 'Ektuni',
+        pntId: 'WRLDCMP.SCADA3.A0100958',
+        base_voltage: 765,
+        brIds: [{name: 'Ektuni_BR1', pntId: 'WRLDCMP.SCADA3.A0100986'}]
     }
 ];
 
@@ -157,7 +163,7 @@ var scadaAPIResults_g = {};
 var suggestionsArray_g = [];
 var brFlowThresholdForOn_g = 5;
 var mainTimerId_g = null;
-var monitoringInterval_g = 5000;
+var monitoringInterval_g = 10000;
 var apiServerBaseAddress_g = "http://localhost:62448";
 // global variables end
 

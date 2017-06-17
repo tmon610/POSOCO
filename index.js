@@ -48,7 +48,7 @@ var fetchScadaValue = function (scadaSourceObj, callback) {
     });
 };
 
-function monitorBusReactors() {
+function monitorBusReactors(fInpObj, done) {
     /* Get the all scada values from API start */
     async.mapSeries(payLoadSources_g, fetchScadaValue, function (err, results) {
         if (err) {
@@ -58,15 +58,14 @@ function monitorBusReactors() {
                 categoryPriority: 0,
                 severityPriority: -0.1,
                 dataSourceObj: {},
-                message: "All values not fetched via API due to error: " + JSON.stringify(err)
+                message: "All Bus Reactor values not fetched via API due to error: " + JSON.stringify(err)
             });
-            return;
+            return done(err);
         }
         //All the values are available in the results Array
         scadaAPIResults_g = results;
-        clearSuggestions();
         checkAllVoltagesForSuggestions();
-        displaySuggestions();
+        return done(null, null);
     });
     /* Get the all scada values from API end */
 
@@ -103,7 +102,7 @@ function monitorBusReactors() {
                 } else {
                     categoryStr = "action";
                     categoryPriority = 1;
-                    messageStr = "Out " + numBrsIn + " Bus Reactors of <span style='color: #5D5D5D'>" + substationSourceObj.name + "</span> since voltage is " + substationAPIResultObj.dval;
+                    messageStr = "Out " + numBrsIn + " Bus Reactors of <span class='name_span'>" + substationSourceObj.name + "</span> since voltage is <span class='name_span'>" + substationAPIResultObj.dval + "</span>";
                 }
                 messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut + "]";
 
@@ -124,7 +123,7 @@ function monitorBusReactors() {
                 // If Substation voltage > high_alert_limit - switch on bus reactors if out
 
                 // Decide severity
-                if (substationAPIResultObj.dval < substationSourceObj.low_alert_limit) {
+                if (substationAPIResultObj.dval > substationSourceObj.high_alert_limit) {
                     severityStr = "alert";
                     severityPriority = 1;
                     colorStr = "red";
@@ -144,7 +143,7 @@ function monitorBusReactors() {
                 } else {
                     categoryPriority = 1;
                     categoryStr = "action";
-                    messageStr = "Take " + numBrsOut + " Bus Reactors of <span style='color: #5D5D5D'>" + substationSourceObj.name + "</span> into service since voltage is " + substationAPIResultObj.dval;
+                    messageStr = "Take " + numBrsOut + " Bus Reactors of <span class='name_span'>" + substationSourceObj.name + "</span> into service since voltage is <span class='name_span'>" + substationAPIResultObj.dval + "</span>";
                 }
                 messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut + "]";
 
@@ -194,6 +193,12 @@ function displaySuggestions() {
     suggestionsArray_g.sort(dynamicSortMultiple("categoryPriority", "severityPriority", "severityIndex"));
     suggestions.push("<h3  style='color:white'>Suggestions</h3>" + "  \n");
     for (var i = suggestionsArray_g.length - 1; i >= 0; i--) {
+        var colorStr = suggestionsArray_g[i]["color"];
+        if (!colorStr) {
+            colorStr = "white";
+        }
+        var tempString = suggestionsArray_g[i]["message"] + " <span class='debug_span'>[pntId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]</span>";
+        suggestions.push("<p style='color:" + colorStr + "'>" + tempString + "</p>");
         // If there is change in category priority and severity Priority add <br>
         if (i != 0) {
             if (suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
@@ -202,12 +207,6 @@ function displaySuggestions() {
                 suggestions.push("<br>");
             }
         }
-        var colorStr = suggestionsArray_g[i]["color"];
-        if (!colorStr) {
-            colorStr = "white";
-        }
-        var tempString = suggestionsArray_g[i]["message"] + " <span style='color: #f0f8ff'>[pntId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]</span>";
-        suggestions.push("<p style='color:" + colorStr + "'>" + tempString + "</p>");
     }
     document.getElementById("div_suggestion").innerHTML = suggestions.join("\n");
 }
@@ -226,12 +225,37 @@ function clearSuggestions() {
     document.getElementById("div_suggestion").innerHTML = "<h3  style='color:white'>Suggestions</h3>" + "\n";
 }
 
+function clearSuggestionsArray() {
+    suggestionsArray_g = [];
+}
+
 function startMonitoring() {
     stopMonitoring();
-    monitorBusReactors();
-    mainTimerId_g = setInterval(monitorBusReactors, monitoringInterval_g);
+    doMonitoring();
+    mainTimerId_g = setInterval(doMonitoring, monitoringInterval_g);
 }
 
 function stopMonitoring() {
     clearInterval(mainTimerId_g);
+}
+
+window.onload = function () {
+    startMonitoring();
+};
+
+function doMonitoring() {
+    var processStartTime = new Date();
+    var doBRMonitoring = function (callback) {
+        monitorBusReactors(null, function (err, result) {
+            callback(null, null);
+        });
+    };
+    var functionsArray = [doBRMonitoring];
+    clearSuggestionsArray();
+    async.waterfall(functionsArray, function (err, result) {
+        displaySuggestions();
+        var processEndTime = new Date();
+        document.getElementById("lastUpdatedText").innerHTML = processEndTime.getDate() + "/" + (processEndTime.getMonth() + 1) + "/" + processEndTime.getFullYear() + " " + processEndTime.getHours() + ":" + processEndTime.getMinutes() + ":" + processEndTime.getSeconds();
+        document.getElementById("processTimeText").innerHTML = "" + (processEndTime.getTime() - processStartTime.getTime()) / 1000;
+    });
 }
