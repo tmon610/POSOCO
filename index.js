@@ -195,13 +195,13 @@ function displaySuggestions() {
     suggestions.push("<h3  style='color:white'>Suggestions</h3>" + "  \n");
     for (var i = suggestionsArray_g.length - 1; i >= 0; i--) {
         // If there is change in category priority and severity Priority add <br>
-        if (i != 0 && suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
-            suggestions.push("<br><br>");
+        if (i != 0) {
+            if (suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
+                suggestions.push("<br><br>");
+            } else if (suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i - 1]["severityPriority"]) {
+                suggestions.push("<br>");
+            }
         }
-        if (i != 0 && suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i - 1]["severityPriority"]) {
-            suggestions.push("<br>");
-        }
-
         var colorStr = suggestionsArray_g[i]["color"];
         if (!colorStr) {
             colorStr = "white";
