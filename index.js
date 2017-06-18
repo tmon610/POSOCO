@@ -202,7 +202,7 @@ function displaySuggestions() {
         // If there is change in category priority and severity Priority add <br>
         if (i != 0) {
             if (suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
-                suggestions.push("<br><br>");
+                suggestions.push("<br>");
             } else if (suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i - 1]["severityPriority"]) {
                 suggestions.push("<br>");
             }
@@ -250,7 +250,12 @@ function doMonitoring() {
             callback(null, null);
         });
     };
-    var functionsArray = [doBRMonitoring];
+    var doKolhapurMapusaHVOffMonitoring = function (prevRes, callback) {
+        monitorKolhapurMapusaHVOut(null, function (err, result) {
+            callback(null, null);
+        });
+    };
+    var functionsArray = [doBRMonitoring, doKolhapurMapusaHVOffMonitoring];
     clearSuggestionsArray();
     async.waterfall(functionsArray, function (err, result) {
         displaySuggestions();

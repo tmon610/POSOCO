@@ -150,16 +150,28 @@ var substation_objects_g = [
         base_voltage: 765,
         brIds: [{name: 'Durg_BR1', pntId: 'WRLDCMP.SCADA1.A0037581'}]
     },
-	{
+    {
         name: 'Ektuni',
         pntId: 'WRLDCMP.SCADA3.A0100958',
         base_voltage: 765,
         brIds: [{name: 'Ektuni_BR1', pntId: 'WRLDCMP.SCADA3.A0100986'}]
+    },
+    {
+        name: 'Kolhapur_PG',
+        pntId: 'WRLDCMP.SCADA1.A0046562',
+        base_voltage: 400,
+        brIds: [{name: 'Kolhapur_PG_BR1', pntId: 'WRLDCMP.SCADA1.A0046585'}]
+    },
+    {
+        name: 'Mapusa',
+        pntId: 'WRLDCMP.SCADA1.A0002805',
+        base_voltage: 400,
+        brIds: [{name: 'Mapusa_BR1', pntId: 'WRLDCMP.SCADA1.A0002831'}]
     }
 ];
 
 var payLoadSources_g = [];
-var scadaAPIResults_g = {};
+var scadaAPIResults_g = [];
 var suggestionsArray_g = [];
 var brFlowThresholdForOn_g = 5;
 var mainTimerId_g = null;
