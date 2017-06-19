@@ -31,7 +31,8 @@ function monitorKolhapurMapusaHVOut(fInpObj, done) {
             // handle error - do nothing since the all values are not fetched
             console.log("Kolhapur Mapusa line flow values not fetched via API due to error: " + JSON.stringify(err));
             addAndDisplaySuggestion({
-                categoryPriority: 0,
+                categoryStr: category_priority_info_g.kolhapur_mapusa_hv_on_off_error.name,
+                categoryPriority: category_priority_info_g.kolhapur_mapusa_hv_on_off_error.priority,
                 severityPriority: -0.1,
                 dataSourceObj: {},
                 message: "Kolhapur Mapusa line flow values not fetched via API due to error: " + JSON.stringify(err)
@@ -59,21 +60,24 @@ function monitorKolhapurMapusaHVOut(fInpObj, done) {
         var numLinesIn = 0;
         numLinesIn += (kolMap1APIResultObj.dval >= 3) ? 1 : 0;
         numLinesIn += (kolMap2APIResultObj.dval >= 3) ? 1 : 0;
-        var categoryStr = "Kolhapur_Mapusa_Action", categoryPriority = 0, messageStr = "", severityStr = "alert", severityPriority = 1, colorStr = "red";
+        var categoryStr = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.name, categoryPriority = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.priority, messageStr = "", severityStr = "alert", severityPriority = 1, colorStr = "red";
         if (kolhapurSubstationAPIResultObj.dval >= hvOffVoltThreshold && mapusaSubstationAPIResultObj.dval >= hvOffVoltThreshold) {
             //If voltage > Threshold
             if (numLinesIn == 2) {
                 // If both lines are in service
                 var kol_map_loading = kolMap1APIResultObj.dval + kolMap2APIResultObj.dval;
                 if (kol_map_loading < 250 || (kol_map_loading < 300 && kolhapurSubstationAPIResultObj.dval >= 423 && mapusaSubstationAPIResultObj.dval >= 423)) {
-                    categoryPriority = 2;
+                    categoryStr = category_priority_info_g.kolhapur_mapusa_hv_on_off_action.name;
+                    categoryPriority = category_priority_info_g.kolhapur_mapusa_hv_on_off_action.priority;
                     messageStr = "OUT 1 of the " + numLinesIn + " Lines between <span class='name_span'>Kolhapur-Mapusa</span> since the voltages are <span class='name_span'>" + kolhapurSubstationAPIResultObj.dval + ", " + kolhapurSubstationAPIResultObj.dval + "</span>. Also Mahalakshmi-Amona & Tillari-Amona to be in service";
                 } else {
-                    categoryPriority = 0.1;
+                    categoryStr = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.name;
+                    categoryPriority = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.priority;
                     messageStr = "Kolhapur-Mapusa Voltages are high(<span class='name_span'>" + kolhapurSubstationAPIResultObj.dval + ", " + kolhapurSubstationAPIResultObj.dval + "</span>) and both lines are IN, but Kolhapur-Mapusa loading is high(<span class='name_span'>" + kol_map_loading + "</span>)";
                 }
             } else {
-                categoryPriority = 0.1;
+                categoryStr = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.name;
+                categoryPriority = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.priority;
                 messageStr = "Kolhapur-Mapusa Voltages are high(<span class='name_span'>" + kolhapurSubstationAPIResultObj.dval + ", " + kolhapurSubstationAPIResultObj.dval + "</span>) but already " + (2 - numLinesIn) + " lines are out";
             }
             // Push to global array
@@ -89,10 +93,12 @@ function monitorKolhapurMapusaHVOut(fInpObj, done) {
             });
         } else if (kolhapurSubstationAPIResultObj.dval <= hvOnVoltThreshold || mapusaSubstationAPIResultObj.dval <= hvOnVoltThreshold) {
             if (numLinesIn != 2) {
-                categoryPriority = 2;
+                categoryStr = category_priority_info_g.kolhapur_mapusa_hv_on_off_action.name;
+                categoryPriority = category_priority_info_g.kolhapur_mapusa_hv_on_off_action.priority;
                 messageStr = "Take IN 1 of the lines between <span class='name_span'>Kolhapur-Mapusa</span> since the voltages are <span class='name_span'>" + kolhapurSubstationAPIResultObj.dval + ", " + kolhapurSubstationAPIResultObj.dval + "</span>";
             } else {
-                categoryPriority = 0.1;
+                categoryStr = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.name;
+                categoryPriority = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.priority;
                 messageStr = "Kolhapur-Mapusa Voltages are low(<span class='name_span'>" + kolhapurSubstationAPIResultObj.dval + ", " + kolhapurSubstationAPIResultObj.dval + "</span>) but already both lines are IN";
             }
             // Push to global array

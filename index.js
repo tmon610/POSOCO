@@ -55,7 +55,8 @@ function monitorBusReactors(fInpObj, done) {
             // handle error - do nothing since the all values are not fetched
             console.log("All values not fetched via API due to error: " + JSON.stringify(err));
             addAndDisplaySuggestion({
-                categoryPriority: 0,
+                categoryStr: category_priority_info_g.br_on_off_error.name,
+                categoryPriority: category_priority_info_g.br_on_off_error.priority,
                 severityPriority: -0.1,
                 dataSourceObj: {},
                 message: "All Bus Reactor values not fetched via API due to error: " + JSON.stringify(err)
@@ -96,13 +97,13 @@ function monitorBusReactors(fInpObj, done) {
                 numBrsOut = substationBRsStatusObj.off.length;
                 numBrsIn = substationBRsStatusObj.on.length;
                 if (numBrsOut == substationSourceObj.brIds.length) {
-                    categoryStr = "info";
-                    categoryPriority = 0;
+                    categoryStr = category_priority_info_g.br_on_off_info.name;
+                    categoryPriority = category_priority_info_g.br_on_off_info.priority;
                     messageStr = substationSourceObj.name + " voltage(" + substationAPIResultObj.dval + ") is low but all(" + substationSourceObj.brIds.length + ") Bus Reactors are OUT";
                 } else {
-                    categoryStr = "action";
-                    categoryPriority = 1;
-                    messageStr = "Out " + numBrsIn + " Bus Reactors of <span class='name_span'>" + substationSourceObj.name + "</span> since voltage is <span class='name_span'>" + substationAPIResultObj.dval + "</span>";
+                    categoryStr = category_priority_info_g.br_on_off_action.name;
+                    categoryPriority = category_priority_info_g.br_on_off_action.priority;
+                    messageStr = "OUT " + numBrsIn + " Bus Reactors of <span class='name_span'>" + substationSourceObj.name + "</span> since voltage is <span class='name_span'>" + substationAPIResultObj.dval + "</span>";
                 }
                 messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut + "]";
 
@@ -137,13 +138,13 @@ function monitorBusReactors(fInpObj, done) {
                 numBrsOut = substationBRsStatusObj.off.length;
                 numBrsIn = substationBRsStatusObj.on.length;
                 if (numBrsIn == substationSourceObj.brIds.length) {
-                    categoryPriority = 0;
-                    categoryStr = "info";
+                    categoryPriority = category_priority_info_g.br_on_off_info.priority;
+                    categoryStr = category_priority_info_g.br_on_off_info.name;
                     messageStr = substationSourceObj.name + " voltage(" + substationAPIResultObj.dval + ") is high but all(" + substationSourceObj.brIds.length + ") Bus Reactors are IN";
                 } else {
-                    categoryPriority = 1;
-                    categoryStr = "action";
-                    messageStr = "Take " + numBrsOut + " Bus Reactors of <span class='name_span'>" + substationSourceObj.name + "</span> into service since voltage is <span class='name_span'>" + substationAPIResultObj.dval + "</span>";
+                    categoryPriority = category_priority_info_g.br_on_off_action.priority;
+                    categoryStr = category_priority_info_g.br_on_off_action.name;
+                    messageStr = "TAKE " + numBrsOut + " Bus Reactors of <span class='name_span'>" + substationSourceObj.name + "</span> into service since voltage is <span class='name_span'>" + substationAPIResultObj.dval + "</span>";
                 }
                 messageStr += "[num_IN = " + numBrsIn + ", num_OUT = " + numBrsOut + "]";
 
@@ -193,20 +194,22 @@ function displaySuggestions() {
     suggestionsArray_g.sort(dynamicSortMultiple("categoryPriority", "severityPriority", "severityIndex"));
     suggestions.push("<h3  style='color:white'>Suggestions</h3>" + "  \n");
     for (var i = suggestionsArray_g.length - 1; i >= 0; i--) {
+        // If there is change in category priority and severity Priority add <br>
+        if (i == 0 || suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
+            if (i != suggestionsArray_g.length - 1) {
+                suggestions.push("<br>");
+            }
+            suggestions.push("<div class='category_separator'>" + suggestionsArray_g[i]["categoryStr"] + "</div>");
+        } else if (suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i - 1]["severityPriority"]) {
+            suggestions.push("<br>");
+        }
         var colorStr = suggestionsArray_g[i]["color"];
         if (!colorStr) {
             colorStr = "white";
         }
         var tempString = suggestionsArray_g[i]["message"] + " <span class='debug_span'>[pntId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]</span>";
         suggestions.push("<p style='color:" + colorStr + "'>" + tempString + "</p>");
-        // If there is change in category priority and severity Priority add <br>
-        if (i != 0) {
-            if (suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
-                suggestions.push("<br>");
-            } else if (suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i - 1]["severityPriority"]) {
-                suggestions.push("<br>");
-            }
-        }
+
     }
     document.getElementById("div_suggestion").innerHTML = suggestions.join("\n");
 }
