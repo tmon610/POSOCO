@@ -195,13 +195,11 @@ function displaySuggestions() {
     suggestions.push("<h3  style='color:white'>Suggestions</h3>" + "  \n");
     for (var i = suggestionsArray_g.length - 1; i >= 0; i--) {
         // If there is change in category priority and severity Priority add <br>
-        if (i == 0 || suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i - 1]["categoryPriority"]) {
-            if (i != suggestionsArray_g.length - 1) {
-                suggestions.push("<br>");
-            }
-            suggestions.push("<div class='category_separator'>" + suggestionsArray_g[i]["categoryStr"] + "</div>");
-        } else if (suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i - 1]["severityPriority"]) {
+        if (i == suggestionsArray_g.length - 1 || suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i + 1]["categoryPriority"]) {
             suggestions.push("<br>");
+            suggestions.push("<div class='category_separator'>" + suggestionsArray_g[i]["categoryStr"] + "</div>");
+        } else if (suggestionsArray_g[i]["severityPriority"] != suggestionsArray_g[i + 1]["severityPriority"]) {
+            //suggestions.push("<br>");
         }
         var colorStr = suggestionsArray_g[i]["color"];
         if (!colorStr) {
@@ -209,7 +207,6 @@ function displaySuggestions() {
         }
         var tempString = suggestionsArray_g[i]["message"] + " <span class='debug_span'>[pntId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]</span>";
         suggestions.push("<p style='color:" + colorStr + "'>" + tempString + "</p>");
-
     }
     document.getElementById("div_suggestion").innerHTML = suggestions.join("\n");
 }
