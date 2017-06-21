@@ -270,7 +270,7 @@ function doMonitoring() {
  * *********
  * If voltage at substation >= high_warning_limit or high_alert_limit (Problem)
  * and
- * all bus reactor is not in service (constraints to take action),
+ * all bus reactors are not in service (constraints to take action),
  * generate the suggestion to take in the remaining bus reactors that are out of service (action)
  * else the give the constraints list for non feasibility of action (excuse)
  *
