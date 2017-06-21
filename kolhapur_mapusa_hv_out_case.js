@@ -61,7 +61,7 @@ function monitorKolhapurMapusaHVOut(fInpObj, done) {
         numLinesIn += (kolMap1APIResultObj.dval >= 3) ? 1 : 0;
         numLinesIn += (kolMap2APIResultObj.dval >= 3) ? 1 : 0;
         var categoryStr = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.name, categoryPriority = category_priority_info_g.kolhapur_mapusa_hv_on_off_info.priority, messageStr = "", severityStr = "alert", severityPriority = 1, colorStr = "red";
-        if (kolhapurSubstationAPIResultObj.dval >= hvOffVoltThreshold && mapusaSubstationAPIResultObj.dval >= hvOffVoltThreshold) {
+        if (kolhapurSubstationAPIResultObj.dval >= 423 || (kolhapurSubstationAPIResultObj.dval >= hvOffVoltThreshold && mapusaSubstationAPIResultObj.dval >= hvOffVoltThreshold)) {
             //If voltage > Threshold
             if (numLinesIn == 2) {
                 // If both lines are in service
@@ -144,6 +144,11 @@ function monitorKolhapurMapusaHVOut(fInpObj, done) {
 /*
  * Algorithm
  * *********
- * If voltage at both ends are greater than 419 and both lines are in service and Mahalakshmi-Amona, Tillari-Amona 220 kV lines are in service
- * and If Kolhapur-Mapusa loading < 250 or Kolhapur-Mapusa loading < 300 and voltage > 423 generate the suggestion to trip one of the Kolhapur Mapusa line else the give the same reason to wait for tripping even if both lines are in service
+ * If voltage at both ends >= 419 or voltage at mapusa >= 423 (Problem)
+ * and
+ * both lines are in service and Mahalakshmi-Amona, Tillari-Amona 220 kV lines are in service (constraints to take action)
+ * and
+ * If Kolhapur-Mapusa loading < 250 or Kolhapur-Mapusa loading < 300 and any one voltage > 423, (constraints to take action)
+ * generate the suggestion to trip one of the Kolhapur Mapusa line (action)
+ * else the give the constraints list for non feasibility of action (excuse)
  * */

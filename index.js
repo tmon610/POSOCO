@@ -264,3 +264,19 @@ function doMonitoring() {
         document.getElementById("processTimeText").innerHTML = "" + (processEndTime.getTime() - processStartTime.getTime()) / 1000;
     });
 }
+
+/*
+ * Algorithm
+ * *********
+ * If voltage at substation >= high_warning_limit or high_alert_limit (Problem)
+ * and
+ * all bus reactor is not in service (constraints to take action),
+ * generate the suggestion to take in the remaining bus reactors that are out of service (action)
+ * else the give the constraints list for non feasibility of action (excuse)
+ *
+ * If voltage at substation <= low_warning_limit or low_alert_limit (Problem)
+ * and
+ * any bus reactor is in service (constraints to take action),
+ * generate the suggestion to take out the remaining bus reactors that are in service (action)
+ * else the give the constraints list for non feasibility of action (excuse)
+ * */
