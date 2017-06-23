@@ -206,13 +206,55 @@ function displaySuggestions() {
             colorStr = "white";
         }
         var tempString = suggestionsArray_g[i]["message"] + " <span class='debug_span'>[pntId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]</span>";
-        suggestions.push("<p style='color:" + colorStr + "'>" + tempString + "</p>");
+        suggestions.push("<p style='color:" +colorStr + "'"+((isMessageAlreadyStriked(suggestionsArray_g[i]) != null)?" class='suggestion_strike' ":"")+ " >"+ tempString + "<button style='width:1px;height:10px' onclick='strikefunction(this,"+i+")'></button></p>");
     }
     document.getElementById("div_suggestion").innerHTML = suggestions.join("\n");
 }
 
 function addSuggestion(newSuggestion) {
     suggestionsArray_g.push(newSuggestion);
+}
+
+var suggestionObj;
+function strikefunction(but,suggestionIterator)
+{
+    suggestionObj = suggestionsArray_g[suggestionIterator];
+    //toggle
+    var strike_class = "suggestion_strike";
+    var classList = but.parentElement.className.split(" ");
+    if(classList.indexOf(strike_class) == -1){
+        classList.push(strike_class);
+    }
+    else
+    {
+        classList.splice(strike_class);
+    }
+    but.parentElement.className = classList.join(" ");
+
+    //add to blacklist if absent
+    if(isMessageAlreadyStriked(suggestionObj) == null)
+    {
+        suggestionStrikeThroughArray_g.push(suggestionObj);
+    }
+    //remove from blacklist if present
+    else
+    {
+        var remove_i = isMessageAlreadyStriked(suggestionObj)
+        suggestionStrikeThroughArray_g.splice(remove_i);
+    }
+    
+}
+
+function isMessageAlreadyStriked(suggestionObj)
+{
+    for(var i=0;i<suggestionStrikeThroughArray_g.length;i++)
+    {
+        if((suggestionStrikeThroughArray_g[i]["categoryPriority"] == suggestionObj["categoryPriority"]) && (suggestionStrikeThroughArray_g[i]["dataSourceObj"].pntId == suggestionObj["dataSourceObj"].pntId))
+        {
+            return i;
+        }
+    }
+    return null;
 }
 
 function addAndDisplaySuggestion(newSuggestion) {
