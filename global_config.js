@@ -177,6 +177,9 @@ var brFlowThresholdForOn_g = 5;
 var mainTimerId_g = null;
 var monitoringInterval_g = 10000;
 var apiServerBaseAddress_g = "http://localhost:62448";
+
+var suggestionStrikeThroughArray_g = [];
+
 // global variables end
 
 // Create the payLoadSources_g array
