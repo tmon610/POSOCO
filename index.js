@@ -164,7 +164,6 @@ function monitorBusReactors(fInpObj, done) {
             }
         }
     }
-
     /* Generate suggestion for substation bus reactors end */
 
 // Return the status of a Bus Reactors Array as an object with `on` and `off` lists
@@ -206,7 +205,7 @@ function displaySuggestions() {
             colorStr = "white";
         }
         var tempString = suggestionsArray_g[i]["message"] + " <span class='debug_span'>[pntId = " + suggestionsArray_g[i]["dataSourceObj"]["pntId"] + "]</span>";
-        suggestions.push("<p style='color:" +colorStr + "'"+((isMessageAlreadyStriked(suggestionsArray_g[i]) != null)?" class='suggestion_strike' ":"")+ " >"+ tempString + "<button style='width:1px;height:10px' onclick='strikefunction(this,"+i+")'></button></p>");
+        suggestions.push("<p style='color:" + colorStr + "'" + ((isMessageInStrikeList(suggestionsArray_g[i]) != null) ? " class='suggestion_strike' " : "") + " >" + tempString + "<button style='width:1px;height:10px' onclick='strikeFunction(this," + i + ")'></button></p>");
     }
     document.getElementById("div_suggestion").innerHTML = suggestions.join("\n");
 }
@@ -215,42 +214,36 @@ function addSuggestion(newSuggestion) {
     suggestionsArray_g.push(newSuggestion);
 }
 
-var suggestionObj;
-function strikefunction(but,suggestionIterator)
-{
+
+function strikeFunction(but, suggestionIterator) {
+    var suggestionObj;
     suggestionObj = suggestionsArray_g[suggestionIterator];
-    //toggle
+    // toggle the class to toggle strike off css
     var strike_class = "suggestion_strike";
     var classList = but.parentElement.className.split(" ");
-    if(classList.indexOf(strike_class) == -1){
+    if (classList.indexOf(strike_class) == -1) {
         classList.push(strike_class);
     }
-    else
-    {
+    else {
         classList.splice(strike_class);
     }
     but.parentElement.className = classList.join(" ");
 
     //add to blacklist if absent
-    if(isMessageAlreadyStriked(suggestionObj) == null)
-    {
+    if (isMessageInStrikeList(suggestionObj) == null) {
         suggestionStrikeThroughArray_g.push(suggestionObj);
     }
     //remove from blacklist if present
-    else
-    {
-        var remove_i = isMessageAlreadyStriked(suggestionObj)
+    else {
+        var remove_i = isMessageInStrikeList(suggestionObj);
         suggestionStrikeThroughArray_g.splice(remove_i);
     }
-    
+
 }
 
-function isMessageAlreadyStriked(suggestionObj)
-{
-    for(var i=0;i<suggestionStrikeThroughArray_g.length;i++)
-    {
-        if((suggestionStrikeThroughArray_g[i]["categoryPriority"] == suggestionObj["categoryPriority"]) && (suggestionStrikeThroughArray_g[i]["dataSourceObj"].pntId == suggestionObj["dataSourceObj"].pntId))
-        {
+function isMessageInStrikeList(suggestionObj) {
+    for (var i = 0; i < suggestionStrikeThroughArray_g.length; i++) {
+        if ((suggestionStrikeThroughArray_g[i]["categoryPriority"] == suggestionObj["categoryPriority"]) && (suggestionStrikeThroughArray_g[i]["dataSourceObj"].pntId == suggestionObj["dataSourceObj"].pntId)) {
             return i;
         }
     }
