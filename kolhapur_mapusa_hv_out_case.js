@@ -29,7 +29,7 @@ function monitorKolhapurMapusaHVOut(fInpObj, done) {
     async.mapSeries(requiredObjects, fetchScadaValue, function (err, results) {
         if (err) {
             // handle error - do nothing since the all values are not fetched
-            console.log("Kolhapur Mapusa line flow values not fetched via API due to error: " + JSON.stringify(err));
+            // console.log("Kolhapur Mapusa line flow values not fetched via API due to error: " + JSON.stringify(err));
             addAndDisplaySuggestion({
                 categoryStr: category_priority_info_g.kolhapur_mapusa_hv_on_off_error.name,
                 categoryPriority: category_priority_info_g.kolhapur_mapusa_hv_on_off_error.priority,

@@ -41,7 +41,7 @@ var fetchScadaValue = function (scadaSourceObj, callback) {
             callback(null, result);
         },
         error: function (textStatus, errorThrown) {
-            console.log(textStatus);
+            //console.log(textStatus);
             //console.log(errorThrown);
             callback(textStatus);
         }
@@ -53,7 +53,7 @@ function monitorBusReactors(fInpObj, done) {
     async.mapSeries(payLoadSources_g, fetchScadaValue, function (err, results) {
         if (err) {
             // handle error - do nothing since the all values are not fetched
-            console.log("All values not fetched via API due to error: " + JSON.stringify(err));
+            // console.log("All values not fetched via API due to error: " + JSON.stringify(err));
             addAndDisplaySuggestion({
                 categoryStr: category_priority_info_g.br_on_off_error.name,
                 categoryPriority: category_priority_info_g.br_on_off_error.priority,
@@ -164,6 +164,7 @@ function monitorBusReactors(fInpObj, done) {
             }
         }
     }
+
     /* Generate suggestion for substation bus reactors end */
 
 // Return the status of a Bus Reactors Array as an object with `on` and `off` lists
@@ -210,8 +211,15 @@ function displaySuggestions() {
     document.getElementById("div_suggestion").innerHTML = suggestions.join("\n");
 }
 
-function addSuggestion(newSuggestion) {
-    suggestionsArray_g.push(newSuggestion);
+function addSuggestion(newSuggestionObj) {
+    // First check if the suggestion object has the properties categoryPriority, categoryStr, severityPriority,
+    // message, dataSourceObj
+    if (newSuggestionObj == undefined || newSuggestionObj["categoryPriority"] == undefined
+        || newSuggestionObj["categoryStr"] == undefined || newSuggestionObj["severityPriority"] == undefined
+        || newSuggestionObj["message"] == undefined || newSuggestionObj["dataSourceObj"] == undefined) {
+        return null;
+    }
+    suggestionsArray_g.push(newSuggestionObj);
 }
 
 
@@ -223,35 +231,44 @@ function strikeFunction(but, suggestionIterator) {
     var classList = but.parentElement.className.split(" ");
     if (classList.indexOf(strike_class) == -1) {
         classList.push(strike_class);
-    }
-    else {
+    } else {
         classList.splice(strike_class);
     }
     but.parentElement.className = classList.join(" ");
 
     //add to blacklist if absent
     if (isMessageInStrikeList(suggestionObj) == null) {
-        suggestionStrikeThroughArray_g.push(suggestionObj);
-    }
-    //remove from blacklist if present
-    else {
+        addSuggestionToStrikeOffList(suggestionObj);
+    } else {
+        //remove from blacklist if present
         var remove_i = isMessageInStrikeList(suggestionObj);
         suggestionStrikeThroughArray_g.splice(remove_i);
     }
-
 }
 
 function isMessageInStrikeList(suggestionObj) {
+    // first check if the suggestion object has the properties categoryPriority, dataSourceObj, dataSourceObj.pntId
+    if (suggestionObj == undefined || suggestionObj["categoryPriority"] == undefined || suggestionObj["dataSourceObj"]["pntId"] == undefined) {
+        return null;
+    }
     for (var i = 0; i < suggestionStrikeThroughArray_g.length; i++) {
-        if ((suggestionStrikeThroughArray_g[i]["categoryPriority"] == suggestionObj["categoryPriority"]) && (suggestionStrikeThroughArray_g[i]["dataSourceObj"].pntId == suggestionObj["dataSourceObj"].pntId)) {
+        if ((suggestionStrikeThroughArray_g[i]["categoryPriority"] == suggestionObj["categoryPriority"]) && (suggestionStrikeThroughArray_g[i]["dataSourceObj"].pntId == suggestionObj["dataSourceObj"]["pntId"])) {
             return i;
         }
     }
     return null;
 }
 
-function addAndDisplaySuggestion(newSuggestion) {
-    addSuggestion(newSuggestion);
+function addSuggestionToStrikeOffList(suggestionObj) {
+    // first check if the suggestion object has the properties categoryPriority, dataSourceObj, dataSourceObj.pntId
+    if (suggestionObj == undefined || suggestionObj["categoryPriority"] == undefined || suggestionObj["dataSourceObj"]["pntId"] == undefined) {
+        return null;
+    }
+    suggestionStrikeThroughArray_g.push(suggestionObj);
+}
+
+function addAndDisplaySuggestion(newSuggestionObj) {
+    addSuggestion(newSuggestionObj);
     displaySuggestions();
 }
 
