@@ -157,16 +157,247 @@ var substation_objects_g = [
         brIds: [{name: 'Ektuni_BR1', pntId: 'WRLDCMP.SCADA3.A0100986'}]
     },
     {
-        name: 'Kolhapur_PG',
-        pntId: 'WRLDCMP.SCADA1.A0046562',
+        name: 'Aurangabad',
+        pntId: 'WRLDCMP.SCADA1.A0037317',
         base_voltage: 400,
-        brIds: [{name: 'Kolhapur_PG_BR1', pntId: 'WRLDCMP.SCADA1.A0046585'}]
+        brIds: [{name: 'Aurangabad_BR1', pntId: 'WRLDCMP.SCADA1.A0037380'}]
+    },
+    {
+        name: 'Bachau',
+        pntId: 'WRLDCMP.SCADA1.A0000077',
+        base_voltage: 400,
+        brIds: [{name: 'Bachau_BR1', pntId: 'WRLDCMP.SCADA1.A0000121'}, {
+            name: 'Bachau_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0000126'
+        }]
+    },
+    {
+        name: 'Bhadrawati',
+        pntId: 'WRLDCMP.SCADA1.A0000279',
+        base_voltage: 400,
+        brIds: [{name: 'Bhadrawati_BR1', pntId: 'WRLDCMP.SCADA1.A0000326'}]
+    },
+    {
+        name: 'Bhatapara',
+        pntId: 'WRLDCMP.SCADA1.A0000449',
+        base_voltage: 400,
+        brIds: [{name: 'Bhatapara_BR1', pntId: 'WRLDCMP.SCADA1.A0000471'}]
+    },
+    {
+        name: 'Bina',
+        pntId: 'WRLDCMP.SCADA1.A0000653',
+        base_voltage: 400,
+        brIds: [{name: 'Bina_BR1', pntId: 'WRLDCMP.SCADA1.A0000701'}]
+    },
+    {
+        name: 'Damoh',
+        pntId: 'WRLDCMP.SCADA1.A0001028',
+        base_voltage: 400,
+        brIds: [{name: 'Damoh_BR1', pntId: 'WRLDCMP.SCADA1.A0001065'}, {
+            name: 'Damoh_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0001067'
+        }]
+    },
+    {
+        name: 'Dehgam',
+        pntId: 'WRLDCMP.SCADA1.A0001154',
+        base_voltage: 400,
+        brIds: [{name: 'Dehgam_BR1', pntId: 'WRLDCMP.SCADA1.A0001204'}, {
+            name: 'Dehgam_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0001206'
+        }]
+    },
+    {
+        name: 'Gwalior',
+        pntId: 'WRLDCMP.SCADA1.A0001475',
+        base_voltage: 400,
+        brIds: [{name: 'Gwalior_BR1', pntId: 'WRLDCMP.SCADA1.A0001522'}, {
+            name: 'Gwalior_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0001523'
+        }, {name: 'Gwalior_BR3', pntId: 'WRLDCMP.SCADA1.A0001524'}]
+    },
+    {
+        name: 'Indore',
+        pntId: 'WRLDCMP.SCADA1.A00001647',
+        base_voltage: 400,
+        brIds: [{name: 'Indore_BR1', pntId: 'WRLDCMP.SCADA1.A00001678'}, {
+            name: 'Indore_BR2',
+            pntId: 'WRLDCMP.SCADA1.A00001680'
+        }]
+    },
+    {
+        name: 'Itarsi',
+        pntId: 'WRLDCMP.SCADA1.A00001727',
+        base_voltage: 400,
+        brIds: [{name: 'Itarsi_BR1', pntId: 'WRLDCMP.SCADA1.A00001768'}, {
+            name: 'Itarsi_BR2',
+            pntId: 'WRLDCMP.SCADA1.A00001773'
+        }, {name: 'Itarsi_BR3', pntId: 'WRLDCMP.SCADA1.A00001779'}]
+    },
+    {
+        name: 'Jabalpur',
+        pntId: 'WRLDCMP.SCADA1.A00001834',
+        base_voltage: 400,
+        brIds: [{name: 'Jabalpur_BR1', pntId: 'WRLDCMP.SCADA1.A00001866'}, {
+            name: 'Jabalpur_BR2',
+            pntId: 'WRLDCMP.SCADA1.A00001871'
+        }]
+    },
+    {
+        name: 'Jabalpur Pooling',
+        pntId: 'WRLDCMP.SCADA1.A0037668',
+        base_voltage: 400,
+        brIds: [{name: 'Jabalpur Pooling_BR1', pntId: 'WRLDCMP.SCADA1.A0037718'}, {
+            name: 'Jabalpur Pooling_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0037719'
+        }]
+    },
+    {
+        name: 'Kala',
+        pntId: 'WRLDCMP.SCADA1.A0038352',
+        base_voltage: 400,
+        brIds: [{name: 'Kala_BR1', pntId: 'WRLDCMP.SCADA1.A0045105'}]
+    },
+    {
+        name: 'Khandwa',
+        pntId: 'WRLDCMP.SCADA1.A0002414',
+        base_voltage: 400,
+        brIds: [{name: 'Khandwa_BR1', pntId: 'WRLDCMP.SCADA1.A0002453'}, {
+            name: 'Khandwa_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0002455'
+        }]
+    },
+    {
+        name: 'Kolhapur',
+        pntId: 'WRLDCMP.SCADA1.A0046560',
+        base_voltage: 400,
+        brIds: [{name: 'Kolhapur_BR1', pntId: 'WRLDCMP.SCADA1.A0046585'}]
+    },
+    {
+        name: 'Kotra',
+        pntId: 'WRLDCMP.SCADA1.A0037878',
+        base_voltage: 400,
+        brIds: [{name: 'Kotra_BR1', pntId: 'WRLDCMP.SCADA1.A0037933'}]
     },
     {
         name: 'Mapusa',
-        pntId: 'WRLDCMP.SCADA1.A0002805',
+        pntId: 'WRLDCMP.SCADA1.A0002803',
         base_voltage: 400,
         brIds: [{name: 'Mapusa_BR1', pntId: 'WRLDCMP.SCADA1.A0002831'}]
+    },
+    {
+        name: 'Navsari',
+        pntId: 'WRLDCMP.SCADA1.A0002957',
+        base_voltage: 400,
+        brIds: [{name: 'Navsari_BR1', pntId: 'WRLDCMP.SCADA1.A0002991'}]
+    },
+    {
+        name: 'Pirana',
+        pntId: 'WRLDCMP.SCADA1.A0003094',
+        base_voltage: 400,
+        brIds: [{name: 'Pirana_BR1', pntId: 'WRLDCMP.SCADA1.A0003122'}]
+    },
+    {
+        name: 'Pune',
+        pntId: 'WRLDCMP.SCADA1.A0003148',
+        base_voltage: 400,
+        brIds: [{name: 'Pune_BR1', pntId: 'WRLDCMP.SCADA1.A0003198'}]
+    },
+    {
+        name: 'Betul',
+        pntId: 'WRLDCMP.SCADA3.A0104646',
+        base_voltage: 400,
+        brIds: [{name: 'Betul_BR1', pntId: 'WRLDCMP.SCADA3.A0104684'}]
+    },
+    {
+        name: 'Daman',
+        pntId: 'WRLDCMP.SCADA1.A0038757',
+        base_voltage: 400,
+        brIds: [{name: 'Daman_BR1', pntId: 'WRLDCMP.SCADA1.A0038785'}]
+    },
+    {
+        name: 'Parli',
+        pntId: 'WRLDCMP.SCADA1.A0003026',
+        base_voltage: 400,
+        brIds: [{name: 'Parli_BR1', pntId: 'WRLDCMP.SCADA1.A0003066'}, {
+            name: 'Parli_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0047579'
+        }]
+    },
+    {
+        name: 'Wardha',
+        pntId: 'WRLDCMP.SCADA1.A0005331',
+        base_voltage: 400,
+        brIds: [{name: 'Wardha_BR1', pntId: 'WRLDCMP.SCADA1.A0005432'}]
+    },
+    {
+        name: 'Raigarh',
+        pntId: 'WRLDCMP.SCADA1.A0003249',
+        base_voltage: 400,
+        brIds: [{name: 'Raigarh_BR1', pntId: 'WRLDCMP.SCADA1.A0003295'}, {
+            name: 'Raigarh_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0003296'
+        }]
+    },
+    {
+        name: 'Raipur',
+        pntId: 'WRLDCMP.SCADA1.A0003328',
+        base_voltage: 400,
+        brIds: [{name: 'Raipur_BR1', pntId: 'WRLDCMP.SCADA1.A0003408'}, {
+            name: 'Raipur_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0003420'
+        }]
+    },
+    {
+        name: 'Rajgarh',
+        pntId: 'WRLDCMP.SCADA1.A0003501',
+        base_voltage: 400,
+        brIds: [{name: 'Rajgarh_BR1', pntId: 'WRLDCMP.SCADA1.A0003535'}]
+    },
+    {
+        name: 'Satna',
+        pntId: 'WRLDCMP.SCADA1.A0003794',
+        base_voltage: 400,
+        brIds: [{name: 'Satna_BR1', pntId: 'WRLDCMP.SCADA1.A0003840'}, {
+            name: 'Satna_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0003851'
+        }]
+    },
+    {
+        name: 'Seoni',
+        pntId: 'WRLDCMP.SCADA1.A0004003',
+        base_voltage: 400,
+        brIds: [{name: 'Seoni_BR1', pntId: 'WRLDCMP.SCADA1.A0004051'}, {
+            name: 'Seoni_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0004053'
+        }]
+    },
+    {
+        name: 'Solapur',
+        pntId: 'WRLDCMP.SCADA1.A0004312',
+        base_voltage: 400,
+        brIds: [{name: 'Solapur_BR1', pntId: 'WRLDCMP.SCADA1.A0004362'}]
+    },
+    {
+        name: 'Sujalpur',
+        pntId: 'WRLDCMP.SCADA1.A0004553',
+        base_voltage: 400,
+        brIds: [{name: 'Sujalpur_BR1', pntId: 'WRLDCMP.SCADA1.A0004583'}, {
+            name: 'Sujalpur_BR2',
+            pntId: 'WRLDCMP.SCADA1.A0047587'
+        }]
+    },
+    {
+        name: 'Vindhyanchal Pooling',
+        pntId: 'WRLDCMP.SCADA1.A0043409',
+        base_voltage: 400,
+        brIds: [{name: 'Vindhyanchal Pooling_BR1', pntId: 'WRLDCMP.SCADA1.A0043438'}]
+    },
+    {
+        name: 'Champa',
+        pntId: 'WRLDCMP.SCADA1.A0045141',
+        base_voltage: 400,
+        brIds: [{name: 'Champa_BR1', pntId: 'WRLDCMP.SCADA1.A0048917'}]
     }
 ];
 
