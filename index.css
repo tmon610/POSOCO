@@ -1,6 +1,6 @@
 #divPanel, #div_suggestion {
     border-style: outset;
-    height: 480px;
+    height: 850px;
 }
 
 #divPanel {
@@ -37,8 +37,8 @@
 }
 
 button {
-    height: 40px;
-    width: 90px;
+    height: 60px;
+    width: 120px;
     background-color: #DCDCDC;
     border: none;
     color: black;

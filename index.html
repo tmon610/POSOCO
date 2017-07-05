@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Grid Assistant</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css"
+          href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
 </head>
@@ -32,15 +33,26 @@
             id='processTimeText'>_</span> secs
     </p>
 </div>
+<div id="tableDiv">
+    <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="example">
+        <thead>
+        <tr>
+            <th>S No</th>
+            <th>Name</th>
+            <th>Base Voltage</th>
+            <th>Real Voltage</th>
+            <th>PU Voltage</th>
+            <th>BRs IN</th>
+            <th>BRs OUT</th>
+            <th>Point ID</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<link rel="stylesheet" type="text/css" href="index.css">
 <script src="libs/js/jquery.min.js"></script>
 <script src="libs/js/async.min.js"></script>
-<script src="utils.js"></script>
-<script src="case_priorities_global_config.js"></script>
-<script src="global_config.js"></script>
-<script src="suggestions.js"></script>
-<script src="voltage_sort_table.js"></script>
-<script src="index.js"></script>
-<script src="kolhapur_mapusa_hv_out_case.js"></script>
 <script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
 <script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
 <script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
@@ -50,5 +62,12 @@
 <script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
 <script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
 <script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+<script src="utils.js"></script>
+<script src="case_priorities_global_config.js"></script>
+<script src="global_config.js"></script>
+<script src="suggestions.js"></script>
+<script src="voltage_sort_table.js"></script>
+<script src="index.js"></script>
+<script src="kolhapur_mapusa_hv_out_case.js"></script>
 </body>
 </html>

@@ -30,8 +30,13 @@ var fetchScadaValue = function (scadaSourceObj, callback) {
         url: apiServerBaseAddress_g + "/api/values/real?pnt=" + scadaSourceObj.pntId,
         type: 'GET',
         success: function (result) {
-            //toastr["info"]("Data received from server");
+            if (!result) {
+                //console.log("Null result obtained for ", scadaSourceObj);
+                result = {dval: null, pntId: scadaSourceObj.pntId};
+                return callback(null, result);
+            }
             //console.log(result);
+            //toastr["info"]("Data received from server");
             result.pntId = scadaSourceObj.pntId;
             var val = result.dval;
             // Convert Numeric value to string if present
@@ -78,7 +83,21 @@ function monitorBusReactors(fInpObj, done) {
             var substationAPIResultObj = getLocalScadaValueObjById(substationSourceObj.pntId);
             var substationBRsStatusObj = createBRStatusObj(substationSourceObj['brIds']);
             var categoryStr = "info", categoryPriority = 0, messageStr = "", numBrsOut, numBrsIn, severityStr = "info", severityPriority = 0, colorStr = "blue";
+            if (!substationAPIResultObj) {
 
+                // Log an error suggestion
+                addSuggestion({
+                    categoryStr: category_priority_info_g.br_on_off_error.name,
+                    categoryPriority: category_priority_info_g.br_on_off_error.priority,
+                    severityPriority: -0.1,
+                    dataSourceObj: substationSourceObj,
+                    severity: "alert",
+                    severityPriority: 0,
+                    severityIndex: 0,
+                    message: "Null API result obtained for " + substationSourceObj.name + " " + substationSourceObj.base_voltage + " KV"
+                });
+                continue;
+            }
             if (substationAPIResultObj.dval < substationSourceObj.low_alert_limit || substationAPIResultObj.dval < substationSourceObj.low_warning_limit) {
                 // If Substation voltage < low_alert_limit or low_warning_limit - switch off BRs if IN
 
@@ -163,29 +182,30 @@ function monitorBusReactors(fInpObj, done) {
                 );
             }
         }
+        refreshVoltageTableData();
     }
 
     /* Generate suggestion for substation bus reactors end */
+}
 
 // Return the status of a Bus Reactors Array as an object with `on` and `off` lists
-    function createBRStatusObj(brIdObjectsArray) {
-        var i = 0;
-        var busReactorsStatusObj = {"on": [], "off": []};
-        for (i = 0; i < brIdObjectsArray.length; i++) {
-            // stub
-            var valObj = getLocalScadaValueObjById(brIdObjectsArray[i]["pntId"], true);
-            if (valObj == null) {
-                continue;
-            }
-
-            if (valObj.dval > brFlowThresholdForOn_g) {
-                busReactorsStatusObj["on"].push(brIdObjectsArray[i]["pntId"]);
-            } else {
-                busReactorsStatusObj["off"].push(brIdObjectsArray[i]["pntId"]);
-            }
+function createBRStatusObj(brIdObjectsArray) {
+    var i = 0;
+    var busReactorsStatusObj = {"on": [], "off": []};
+    for (i = 0; i < brIdObjectsArray.length; i++) {
+        // stub
+        var valObj = getLocalScadaValueObjById(brIdObjectsArray[i]["pntId"], true);
+        if (valObj == null) {
+            continue;
         }
-        return busReactorsStatusObj;
+
+        if (valObj.dval > brFlowThresholdForOn_g) {
+            busReactorsStatusObj["on"].push(brIdObjectsArray[i]["pntId"]);
+        } else {
+            busReactorsStatusObj["off"].push(brIdObjectsArray[i]["pntId"]);
+        }
     }
+    return busReactorsStatusObj;
 }
 
 function startMonitoring() {
@@ -199,6 +219,7 @@ function stopMonitoring() {
 }
 
 window.onload = function () {
+    setUpVoltageSortTable();
     startMonitoring();
 };
 

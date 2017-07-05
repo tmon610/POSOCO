@@ -2,7 +2,7 @@ function displaySuggestions() {
     var suggestions = [];
     // sort suggestions array by category first and severity next - most important will be at the last
     suggestionsArray_g.sort(dynamicSortMultiple("categoryPriority", "severityPriority", "severityIndex"));
-    suggestions.push("<h3  style='color:white'>Suggestions</h3>" + "  \n");
+    suggestions.push("<span  style='color:white'>Suggestions</span>" + "  \n");
     for (var i = suggestionsArray_g.length - 1; i >= 0; i--) {
         // If there is change in category priority and severity Priority add <br>
         if (i == suggestionsArray_g.length - 1 || suggestionsArray_g[i]["categoryPriority"] != suggestionsArray_g[i + 1]["categoryPriority"]) {
